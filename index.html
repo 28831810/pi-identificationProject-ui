@@ -1,0 +1,18 @@
+<h2>PI Identification</h2>
+<div>Uploads</div>
+<app-uploads-list [uploads]="uploads">
+</app-uploads-list>
+
+<div *ngIf="uploads.length == 0">No files uploaded yet.</div>
+<div>
+
+    
+</div>
+
+<form [formGroup]="uploadForm">
+    <label for="fileInput">Choose File</label>
+    <input type="file"
+           id="fileInput"
+           formControlName="fileInput"
+           (change)="uploadFile($event)">
+</form>
