@@ -1,0 +1,20 @@
+<table mat-table [dataSource]="uploadsDataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="uploadName">
+      <th mat-header-cell *matHeaderCellDef>Upload name</th>
+      <td mat-cell *matCellDef="let upload"> {{ upload.name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let upload">
+            <button (click)="onEdit(upload)">
+                EDIT
+            </button>
+         </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
