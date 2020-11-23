@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ConfigService } from './config.service';
+import { PageMode } from './enums/page-mode.enum';
 import { Config } from './models/config.model';
+import { Credential } from './models/credential.model';
 import { LoginResponse } from './models/login-response.model';
 import { SignupResponse } from './models/signup-response.model';
 import { UploadResult } from './models/uploadResult.model';
@@ -12,6 +14,8 @@ import { UploadResult } from './models/uploadResult.model';
 })
 export class ApiService {
   config!: Config;
+  pageMode!: PageMode;
+  selectedUpload!: UploadResult;
 
   constructor(private httpClient: HttpClient, private configService: ConfigService) { 
     this.config = configService.getConfig();

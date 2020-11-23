@@ -9,13 +9,19 @@ import { UploadsListComponent } from './components/uploads-list/uploads-list.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table'; 
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { LoginComponent } from './components/login/login.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { ViewEditUploadResultComponent } from './components/view-edit-upload-result/view-edit-upload-result.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     UploadsListComponent,
+    LoginComponent,
+    ViewEditUploadResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +29,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     BrowserAnimationsModule,
     MatTableModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule
   ],
   providers: [
     

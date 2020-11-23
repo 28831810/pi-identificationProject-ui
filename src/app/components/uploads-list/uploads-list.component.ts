@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/api.service';
+import { PageMode } from 'src/app/enums/page-mode.enum';
+import { Config } from 'src/app/models/config.model';
 import { UploadResult } from 'src/app/models/uploadResult.model';
 
 @Component({
@@ -14,7 +17,7 @@ export class UploadsListComponent implements OnInit {
 
   @Input() uploads: UploadResult[] = [];
   
-  constructor(private router: Router) { 
+  constructor(private router: Router, private service: ApiService) { 
 
   }
 
@@ -23,6 +26,8 @@ export class UploadsListComponent implements OnInit {
   }
 
   onEdit(uploadResult: UploadResult) {
-    this.router.navigateByUrl('/dghags');
+    this.service.pageMode = PageMode.Edit;
+    this.service.selectedUpload = uploadResult;
+    this.router.navigateByUrl('view-edit');
   }
 }

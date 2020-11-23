@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Filetype } from 'src/app/enums/filetype.enum';
+import { PageMode } from 'src/app/enums/page-mode.enum';
 import { UploadResult } from 'src/app/models/uploadResult.model';
 
 @Component({
@@ -16,8 +18,7 @@ export class HomeComponent implements OnInit {
     fileInput: new FormControl()
   })
 
-  constructor(private apiService: ApiService) {
-    console.log('Length:', this.uploads.length);
+  constructor(private apiService: ApiService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -77,7 +78,15 @@ export class HomeComponent implements OnInit {
     const fileToUpload = event.target.files?.item(0);
     if(fileToUpload != null)
     {
-      this.apiService.uploadFile(fileToUpload);
+      this.apiService.pageMode = PageMode.View;
+        this.apiService.selectedUpload = this.uploads[1];
+        this.router.navigateByUrl('/view-edit');
+
+      this.apiService.uploadFile(fileToUpload).subscribe((result: UploadResult) => {
+        this.apiService.pageMode = PageMode.View;
+        this.apiService.selectedUpload = result;
+        this.router.navigateByUrl('/view-edit');
+      });
     }
   }
 }

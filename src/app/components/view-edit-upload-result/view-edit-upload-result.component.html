@@ -1,0 +1,48 @@
+<h2>{{ title }}</h2>
+<form [formGroup]="detailsForm">
+    <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="idInput">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>File Name</mat-label>
+        <input matInput formControlName="nameInput">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>File Type</mat-label>
+        <input matInput formControlName="typeInput">
+    </mat-form-field>
+     <br/>
+</form>
+<table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="tableName">
+        <th mat-header-cell *matHeaderCellDef>Table/File Name</th>
+        <td mat-cell *matCellDef="let metadata">{{ metadata.tableName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fieldName">
+        <th mat-header-cell *matHeaderCellDef>Field Name</th>
+        <td mat-cell *matCellDef="let metadata">{{ metadata.fieldName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>Is Protected</th>
+        <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [disabled]="!isEdit">
+            </mat-checkbox>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="selection.toggle(row)">
+    </tr>
+</table>
+
+<button (click)="onBack()">Back</button>
+<button *ngIf="isEdit" (click)="onUpdate()">Update</button>

@@ -1,0 +1,15 @@
+<h2>Login</h2>
+<form [formGroup]="loginForm">
+    <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" placeholder="Username">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Password">
+      </mat-form-field>
+     <br/>
+    <button (click)="onRegister()" [disabled]="loginForm.invalid">Register</button>
+    <button (click)="onLogin()" [disabled]="loginForm.invalid">Login</button>
+</form>
